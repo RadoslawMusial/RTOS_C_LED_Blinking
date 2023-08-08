@@ -28,11 +28,10 @@ Led_semaphor = xSemaphoreCreateBinary();
 xSemaphoreGive(Led_semphor); 
 
 
-  xTaskCreate(Task1_Function," TASK nr 1",128,NULL,&Task1) ;
-  xTaskCreate(Task2_function," TASK nr 2",128,NULL,&Task2) ;
+  xTaskCreate(Task1_Function," TASK nr 1",128,NULL,2,&Task1) ;
+  xTaskCreate(Task2_function," TASK nr 2",128,NULL,1,&Task2) ;
 
-  xTaskPriority(Task1, 2) ; 
-  xTaskPriority(Task1, 1) ;
+ 
 }
 
 
@@ -68,3 +67,12 @@ void Task2(void *Parametrs)
   xSemaphoreGive(Led_semaphor, portMAX_DELAY) ; 
   }
 }
+
+
+//int main ()
+//{
+//  xTaskCreate(Task1_Function," TASK nr 1",128,NULL,2,&Task1) ;
+//  xTaskCreate(Task2_function," TASK nr 2",128,NULL,1,&Task2) ;
+//  vTaskStartScheduler(); 
+//  return 0 ; 
+//}
