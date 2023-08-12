@@ -32,57 +32,57 @@ void setup() {
   xSemaphoreGive(Led_semaphor);
 
   xTaskCreate(Task1_Function, "TASK nr 1", 128, NULL, 1, &Task1);
- xTaskCreate(Task2_function, "TASK nr 2", 128, NULL, 2, &Task2);
+  xTaskCreate(Task2_function, "TASK nr 2", 128, NULL, 2, &Task2);
 
   vTaskStartScheduler();
 }
 
 void loop() {
-  
+
 }
 
 void Task1_Function(void *pvParametrs) {
   while (1) {
-    xSemaphoreTake(Led_semaphor,portMAX_DELAY);
-      
-      digitalWrite(ledPIN_GREEN_PEDESTRIAN, 0);
-      digitalWrite(ledPIN_RED_TRAFFIC, 1);
-      vTaskDelay(100) ; 
-      digitalWrite(ledPIN_RED_TRAFFIC, 0); 
-      digitalWrite(ledPIN_YELLOW_TRAFFIC, 1);
-      digitalWrite(ledPIN_RED_PEDESTRIAN, 1);
-      vTaskDelay(100) ; 
-       digitalWrite(ledPIN_YELLOW_TRAFFIC, 0);
-       digitalWrite(ledPIN_GREEN_TRAFFIC, 1);
-       ////
-       vTaskDelay(100) ; 
-       digitalWrite(ledPIN_RED_PEDESTRIAN, 1);
-         vTaskDelay(1000) ; 
-          xSemaphoreGive(Led_semaphor);
-    
-             vTaskDelay(1000) ;
-  
+    xSemaphoreTake(Led_semaphor, portMAX_DELAY);
+
+    digitalWrite(ledPIN_GREEN_PEDESTRIAN, 0);
+    digitalWrite(ledPIN_RED_TRAFFIC, 1);
+    vTaskDelay(100) ;
+    digitalWrite(ledPIN_RED_TRAFFIC, 0);
+    digitalWrite(ledPIN_YELLOW_TRAFFIC, 1);
+    digitalWrite(ledPIN_RED_PEDESTRIAN, 1);
+    vTaskDelay(100) ;
+    digitalWrite(ledPIN_YELLOW_TRAFFIC, 0);
+    digitalWrite(ledPIN_GREEN_TRAFFIC, 1);
+    ////
+    vTaskDelay(100) ;
+    digitalWrite(ledPIN_RED_PEDESTRIAN, 1);
+    vTaskDelay(1000) ;
+    xSemaphoreGive(Led_semaphor);
+
+    vTaskDelay(1000) ;
+
   }
 }
 
-  void Task2_function(void *param)
-  {
-  while (1){
+void Task2_function(void *param)
+{
+  while (1) {
 
-    xSemaphoreTake(Led_semaphor,portMAX_DELAY) ; 
+    xSemaphoreTake(Led_semaphor, portMAX_DELAY) ;
     digitalWrite(ledPIN_RED_PEDESTRIAN, 1);
-          vTaskDelay(100) ;
-         digitalWrite(ledPIN_GREEN_PEDESTRIAN, 0);
-         digitalWrite(ledPIN_GREEN_TRAFFIC, 0);
-      digitalWrite(ledPIN_YELLOW_TRAFFIC, 1);
-      vTaskDelay(100); 
-      digitalWrite(ledPIN_YELLOW_TRAFFIC, 0);
-      
+    vTaskDelay(100) ;
+    digitalWrite(ledPIN_GREEN_PEDESTRIAN, 0);
+    digitalWrite(ledPIN_GREEN_TRAFFIC, 0);
+    digitalWrite(ledPIN_YELLOW_TRAFFIC, 1);
+    vTaskDelay(100);
+    digitalWrite(ledPIN_YELLOW_TRAFFIC, 0);
+
     digitalWrite(ledPIN_RED_TRAFFIC, 1);
     digitalWrite(ledPIN_RED_PEDESTRIAN, 0);
     digitalWrite(ledPIN_GREEN_PEDESTRIAN, 1);
-    vTaskDelay(1200) ; 
-    xSemaphoreGive(Led_semaphor) ; 
-     vTaskDelay(1000) ;
+    vTaskDelay(1200) ;
+    xSemaphoreGive(Led_semaphor) ;
+    vTaskDelay(1000) ;
   }
-} 
+}
